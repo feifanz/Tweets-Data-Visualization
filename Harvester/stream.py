@@ -5,7 +5,7 @@ import time
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import sys
 from config import *
-
+from count_topic import *
 
 
 #get args from terminal
@@ -55,11 +55,12 @@ class MyStreamListener(tweepy.StreamListener):
                 nplace = tweet['place']
                 nentities = tweet['entities']
                 sentiment = analyzer.polarity_scores(ntext)
+                topic = give_label(text)
                 #generate new tweeter
                 ndoc = {'_id': nid, 'text': ntext, 'user': nuser,
                         'coordinates': ncoordinates, 'create_time': ntime,
                         'place': nplace, 'entities': nentities,
-                        'addressed': False, 'sentiment': sentiment}
+                        'addressed': False, 'sentiment': sentiment, 'topic': topic}
                 db.save(ndoc)
                 print(nid)
                 print('-------------------------------------')
