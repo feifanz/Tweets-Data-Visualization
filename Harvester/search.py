@@ -52,6 +52,14 @@ print('database: ' + DB_Name)
 #instance of do sentiment analysis
 analyzer = SentimentIntensityAnalyzer()
 
+
+# add time tag
+def time_label(tweet_time):
+    time_parse = tweet_time.split(' ')[3]
+    time_tag = time_parse[:2]
+    return time_tag
+
+
 #start collect data
 for data in tweepy.Cursor(api.search, q="*",geocode=GEOCODE , lang="en").items():
     while True:
@@ -70,11 +78,12 @@ for data in tweepy.Cursor(api.search, q="*",geocode=GEOCODE , lang="en").items()
                 nplace = doc['place']
                 nentities = doc['entities']
                 sentiment = analyzer.polarity_scores(ntext)
+                time_tag = time_label(ntime)
                 #generate new tweeter
                 ndoc = {'_id': nid, 'text': ntext, 'user': nuser,
                         'coordinates': ncoordinates, 'create_time': ntime,
                         'place': nplace, 'entities': nentities,
-                        'addressed': False,'sentiment' : sentiment}
+                        'addressed': False, 'sentiment': sentiment, 'time_tag': time_tag}
                 db.save(ndoc)
                 print(nid)
                 print('********************************************')
@@ -82,3 +91,6 @@ for data in tweepy.Cursor(api.search, q="*",geocode=GEOCODE , lang="en").items()
             time.sleep(60 * 16)
             continue
         break
+
+
+
