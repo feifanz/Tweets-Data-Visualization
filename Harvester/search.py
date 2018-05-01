@@ -7,6 +7,7 @@ import sys
 from config import *
 from count_topic import *
 from swearing_label import *
+from Locate import *
 
 #get args from terminal
 GEOCODE = GEOCODES['melbourne']
@@ -81,11 +82,12 @@ for data in tweepy.Cursor(api.search, q="*",geocode=GEOCODE , lang="en").items()
                 swearing = lable_swearing(ntext)
                 topic = give_label(ntext)
                 time_tag = time_label(ntime)
+                suburb = give_suburb(ncoordinates)
                 #generate new tweeter
                 ndoc = {'_id': nid, 'text': ntext, 'user': nuser,
                         'coordinates': ncoordinates, 'create_time': ntime,
                         'place': nplace, 'entities': nentities,
-                        'addressed': False, 'sentiment': sentiment, 'swearing': swearing, 'topic': topic,'time_tag': time_tag}
+                        'addressed': False, 'sentiment': sentiment, 'swearing': swearing, 'topic': topic,'time_tag': time_tag, 'suburb': suburb}
                 db.save(ndoc)
                 print(nid)
                 print('********************************************')
