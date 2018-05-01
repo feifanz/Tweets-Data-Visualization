@@ -6,6 +6,7 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import sys
 from config import *
 from swearing_label import *
+from count_topic import *
 
 # get args from terminal
 GEOBOX = GEOBOXS['melbourne']
@@ -60,10 +61,12 @@ class MyStreamListener(tweepy.StreamListener):
                 sentiment = analyzer.polarity_scores(ntext)
                 swearing = lable_swearing(ntext)
                 # generate new tweeter
+                topic = give_label(text)
+                time_tag = time_label(ntime)
                 ndoc = {'_id': nid, 'text': ntext, 'user': nuser,
                         'coordinates': ncoordinates, 'create_time': ntime,
                         'place': nplace, 'entities': nentities,
-                        'addressed': False, 'sentiment': sentiment, 'swearing': swearing}
+                        'addressed': False, 'sentiment': sentiment, 'swearing': swearing,'topic': topic,'time_tag': time_tag}
                 db.save(ndoc)
                 print(nid)
                 print('-------------------------------------')
