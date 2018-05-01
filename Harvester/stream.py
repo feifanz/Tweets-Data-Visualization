@@ -106,7 +106,14 @@ auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
 
-# start stream app
-myStreamListener = MyStreamListener()
-myStream = tweepy.Stream(auth=api.auth, listener=myStreamListener)
-myStream.filter(locations=GEOBOX, languages=["en"])
+
+def start_stream():
+    while True:
+        try:
+            #start stream app
+            myStreamListener = MyStreamListener()
+            myStream = tweepy.Stream(auth = api.auth, listener=myStreamListener)
+            myStream.filter(locations=GEOBOX, languages=["en"])
+        except:
+            continue
+start_stream()
