@@ -10,14 +10,16 @@ import { View1Component } from './view1/view1.component';
 import { ViewService } from './view.service';
 import { View2Component } from './view2/view2.component';
 import { View3Component } from './view3/view3.component';
-import { DashbordComponent } from './dashbord/dashbord.component'
+import { DashbordComponent } from './dashbord/dashbord.component';
+import { MapviewComponent } from './mapview/mapview.component'
 @NgModule({
   declarations: [
     AppComponent,
     View1Component,
     View2Component,
     View3Component,
-    DashbordComponent
+    DashbordComponent,
+    MapviewComponent
   ],
   imports: [
     BrowserModule,
