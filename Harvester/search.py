@@ -5,8 +5,9 @@ import time
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import sys
 from config import *
-
-
+from count_topic import *
+from swearing_label import *
+from Locate import *
 
 #get args from terminal
 GEOCODE = GEOCODES['melbourne']
@@ -53,41 +54,47 @@ print('database: ' + DB_Name)
 analyzer = SentimentIntensityAnalyzer()
 
 
+# add time tag
+def time_label(tweet_time):
+    time_parse = tweet_time.split(' ')[3]
+    time_tag = time_parse[:2]
+    return time_tag
 
-def start_stream():
+
+#start collect data
+for data in tweepy.Cursor(api.search, q="*",geocode=GEOCODE , lang="en").items():
     while True:
         try:
-            # start collect data
-            for data in tweepy.Cursor(api.search, q="*", geocode=GEOCODE, lang="en").items():
-                while True:
-                    try:
-                        njson = json.dumps(data._json, ensure_ascii=False)
-                        doc = json.loads(njson)
-                        nid = doc['id_str']
+            njson = json.dumps(data._json, ensure_ascii=False)
+            doc = json.loads(njson)
+            nid = doc['id_str']
 
-                        if nid in db:
-                            print('--------already saved----------------')
-                        else:
-                            ntext = doc['text']
-                            ncoordinates = doc['coordinates']
-                            nuser = doc['user']
-                            ntime = doc['created_at']
-                            nplace = doc['place']
-                            nentities = doc['entities']
-                            sentiment = analyzer.polarity_scores(ntext)
-                            # generate new tweeter
-                            ndoc = {'_id': nid, 'text': ntext, 'user': nuser,
-                                    'coordinates': ncoordinates, 'create_time': ntime,
-                                    'place': nplace, 'entities': nentities,
-                                    'addressed': False, 'sentiment': sentiment}
-                            db.save(ndoc)
-                            print(nid)
-                            print('********************************************')
-                    except tweepy.TweepError:
-                        time.sleep(60 * 16)
-                        continue
-                    break
-        except:
+            if nid in db:
+                print('--------already saved----------------')
+            else:
+                ntext = doc['text']
+                ncoordinates = doc['coordinates']
+                nuser = doc['user']
+                ntime = doc['created_at']
+                nplace = doc['place']
+                nentities = doc['entities']
+                sentiment = analyzer.polarity_scores(ntext)
+                swearing = lable_swearing(ntext)
+                topic = give_label(ntext)
+                time_tag = time_label(ntime)
+                suburb = give_suburb(ncoordinates)
+                #generate new tweeter
+                ndoc = {'_id': nid, 'text': ntext, 'user': nuser,
+                        'coordinates': ncoordinates, 'create_time': ntime,
+                        'place': nplace, 'entities': nentities,
+                        'addressed': False, 'sentiment': sentiment, 'swearing': swearing, 'topic': topic,'time_tag': time_tag, 'suburb': suburb}
+                db.save(ndoc)
+                print(nid)
+                print('********************************************')
+        except tweepy.TweepError:
+            time.sleep(60 * 16)
             continue
+        break
 
-start_stream()
+
+
