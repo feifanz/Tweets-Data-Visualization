@@ -5,10 +5,10 @@ import time
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import sys
 from config import *
+from swearing_label import *
 from count_topic import *
 
-
-#get args from terminal
+# get args from terminal
 GEOBOX = GEOBOXS['melbourne']
 DB_Name = 'tweets_stream_mel'
 if len(sys.argv) > 1:
@@ -23,19 +23,23 @@ auth_id = 0
 if len(sys.argv) > 2:
     auth_id = int(sys.argv[2])
 
-
-#connet to couchdb
-#server = Server('http://admin:admin@127.0.0.1:5984/')
+# connet to couchdb
+# server = Server('http://admin:admin@127.0.0.1:5984/')
 server = Server(SERVER_ADDR)
 try:
     db = server[DB_Name]
 except:
     db = server.create(DB_Name)
 
-
-
-#instance of do sentiment analysis
+# instance of do sentiment analysis
 analyzer = SentimentIntensityAnalyzer()
+
+
+# time_label added
+def time_label(tweet_time):
+    time_parse = tweet_time.split(' ')[3]
+    time_tag = time_parse[:2]
+    return time_tag
 
 
 class MyStreamListener(tweepy.StreamListener):
@@ -55,12 +59,14 @@ class MyStreamListener(tweepy.StreamListener):
                 nplace = tweet['place']
                 nentities = tweet['entities']
                 sentiment = analyzer.polarity_scores(ntext)
+                swearing = lable_swearing(ntext)
+                # generate new tweeter
                 topic = give_label(text)
-                #generate new tweeter
+                time_tag = time_label(ntime)
                 ndoc = {'_id': nid, 'text': ntext, 'user': nuser,
                         'coordinates': ncoordinates, 'create_time': ntime,
                         'place': nplace, 'entities': nentities,
-                        'addressed': False, 'sentiment': sentiment, 'topic': topic}
+                        'addressed': False, 'sentiment': sentiment, 'swearing': swearing,'topic': topic,'time_tag': time_tag}
                 db.save(ndoc)
                 print(nid)
                 print('-------------------------------------')
@@ -70,28 +76,25 @@ class MyStreamListener(tweepy.StreamListener):
 
         return True
 
-
     def on_error(self, status):
         print(status)
         """ Handle any error throws from stream API """
         if status == 420:
             self.on_timeout()
 
-
     def on_timeout(self):
         """ Handle time out when API reach its limit """
         print("API Reach its limit, sleep for 10 minutes")
-        time.sleep(60*16)
+        time.sleep(60 * 16)
         return
 
 
-#print config information
+# print config information
 print('Auth_id: ' + str(auth_id))
 print('GEOCODE: ' + str(GEOBOX))
 print('database: ' + DB_Name)
 
-
-#auth twitter account
+# auth twitter account
 consumer_key = AUTH[auth_id]['consumer_key']
 consumer_secret = AUTH[auth_id]['consumer_secret']
 access_token = AUTH[auth_id]['access_token']
@@ -101,7 +104,7 @@ auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
 
-#start stream app
+# start stream app
 myStreamListener = MyStreamListener()
-myStream = tweepy.Stream(auth = api.auth, listener=myStreamListener)
+myStream = tweepy.Stream(auth=api.auth, listener=myStreamListener)
 myStream.filter(locations=GEOBOX, languages=["en"])
