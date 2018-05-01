@@ -36,3 +36,4 @@ GEOBOXS = {
 }
 
 SERVER_ADDR = 'http://admin:sweetheart@115.146.86.47:5986/'
+SERVER_ADDR_TEST = 'http://admin:admin@127.0.0.1:5984/'
