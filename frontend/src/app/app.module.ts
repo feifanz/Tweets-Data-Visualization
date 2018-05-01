@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppRoutingModule }     from './app-routing.module';
+import { ChartsModule } from 'ng2-charts';
 
 import { AppComponent } from './app.component';
 import { View1Component } from './view1/view1.component';
@@ -22,7 +23,8 @@ import { DashbordComponent } from './dashbord/dashbord.component'
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ChartsModule
   ],
   providers: [ViewService],
   bootstrap: [AppComponent]
