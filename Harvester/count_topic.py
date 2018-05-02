@@ -35,8 +35,12 @@ clf.fit(X_train, y_train)
 def classify_tweeet(tweet, vectorizer, classifier):
     X_test = vectorizer.transform(tweet)
     pred = classifier.predict(X_test)
-    # print(pred)
-    t = target_names[int(pred)]
+    df = clf.decision_function(X_test)
+    score = df[0][int(pred)]
+    if score >= float(-0.3):
+        t = target_names[int(pred)]
+    else:
+        t = 'Unable to classify'
     return t
 
 
@@ -82,4 +86,5 @@ def give_label(tweet):
     # print(label)
     # topic_count[label] += 1
     return label
+
 
