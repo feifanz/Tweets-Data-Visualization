@@ -1,0 +1,11 @@
+{"rows":[
+{"key":"Melbourne - Inner","value":{"sum":0.24}},
+{"key":"Melbourne - Inner East","value":{"sum":0.15}},
+{"key":"Melbourne - Inner South","value":{"sum":0.11}},
+{"key":"Melbourne - North East","value":{"sum":0.08}},
+{"key":"Melbourne - North West","value":{"sum":0.09}},
+{"key":"Melbourne - Outer East","value":{"sum":0.08}},
+{"key":"Melbourne - South East","value":{"sum":0.10}},
+{"key":"Melbourne - West","value":{"sum":0.08}},
+{"key":"Mornington Peninsula","value":{"sum":0.07}}
+]}

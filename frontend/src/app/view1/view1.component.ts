@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ViewService } from '../view.service';
+import {Http} from '@angular/http';
 
 @Component({
   selector: 'app-view1',
@@ -7,52 +7,63 @@ import { ViewService } from '../view.service';
   styleUrls: ['./view1.component.css']
 })
 export class View1Component implements OnInit {
-
-  constructor(private viewService: ViewService) { }
+  swearing_education_mel;
+ 
+  constructor(private http:Http) {
+    this.http.get('../assets/sa4_swearing.json')
+                .subscribe(res => {
+                  var sum = [];
+                  var edu = [];
+                  for(var key in res.json()['rows']){
+                    sum.push(res.json()['rows'][key]['value']['sum']);
+                    edu.push(res.json()['rows'][key]['value']['education']);
+                  }
+                  this.swearing_education_mel = [
+                  {data : sum, label: 'swearing_sum'},
+                  {data : edu, label: 'Education'}
+                  ];
+                  console.log(this.swearing_education_mel);
+                });
+  }
 
   ngOnInit() {
   }
+  //line chart
+  public income_education_mel = [
+  {data:[0.24,0.15,0.11,0.08,0.09,0.08,0.10,0.08,0.07], label: 'Income'},
+  {data:[0.437,0.433,0.45,0.419,0.376,0.513,0.464,0.259,0.479], label: 'Positive'}
+  ];
 
-  public barChartOptions:any = {
-    scaleShowVerticalLines: false,
+  public lineChartLabels:Array<any> = ['Inner', 'Inner East', 'Inner South', 'North East', 'North West', 'Outer East', 'South East', 'West', 'Mornington Peninsula'];
+  public lineChartOptions:any = {
     responsive: true
   };
-  public barChartLabels:string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+
+  public lineChartLegend:boolean = true;
+  public lineChartType:string = 'line';
+
+  //stacked bar chart
+  public barChartOptions:any = {
+  scaleShowVerticalLines: false,
+  responsive: true,
+  scales: {
+  xAxes: [{
+    stacked: true
+  }],
+  yAxes: [{
+    stacked: true
+  }]
+  }
+
+  };
+  public barChartLabels:string[] = ['Inner', 'Inner East', 'Inner South', 'North East', 'North West', 'Outer East', 'South East', 'West', 'Mornington Peninsula'];
   public barChartType:string = 'bar';
   public barChartLegend:boolean = true;
- 
+
   public barChartData:any[] = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
+  {data: [0.086, 0.099, 0.095, 0.104, 0.119, 0.065, 0.101, 0.039, 0.111], label: 'neg'},
+  {data: [0.476, 0.467, 0.454, 0.476, 0.503, 0.421, 0.434, 0.700, 0.408], label: 'neu'},
+  {data: [0.437, 0.433, 0.45, 0.419, 0.376, 0.513, 0.464, 0.259, 0.479], label: 'pos'}
   ];
- 
-  // events
-  public chartClicked(e:any):void {
-    console.log(e);
-  }
- 
-  public chartHovered(e:any):void {
-    console.log(e);
-  }
- 
-  public randomize():void {
-    // Only Change 3 values
-    let data = [
-      Math.round(Math.random() * 100),
-      59,
-      80,
-      (Math.random() * 100),
-      56,
-      (Math.random() * 100),
-      40];
-    let clone = JSON.parse(JSON.stringify(this.barChartData));
-    clone[0].data = data;
-    this.barChartData = clone;
-    /**
-     * (My guess), for Angular to recognize the change in the dataset
-     * it has to change the dataset variable directly,
-     * so one way around it, is to clone the data, change it and then
-     * assign it;
-     */
-  }
+
 }

@@ -1,26 +1,62 @@
-<div class="row">
-  <div class="col-md-6">
-    <div style="display: block;">
-    <canvas baseChart width="400" height="400"
-                [datasets]="lineChartData"
-                [labels]="lineChartLabels"
-                [options]="lineChartOptions"
-                [colors]="lineChartColors"
-                [legend]="lineChartLegend"
-                [chartType]="lineChartType"
-                (chartHover)="chartHovered($event)"
-                (chartClick)="chartClicked($event)"></canvas>
+<div class="row" *ngIf="lineChartData">
+  <div class="col-md-8">
+    <div style="display: block; ">
+      <canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
     </div>
   </div>
-  <div class="col-md-6" style="margin-bottom: 10px">
-    <table class="table table-responsive table-condensed">
-      <tr>
-        <th *ngFor="let label of lineChartLabels">{{label}}</th>
-      </tr>
-      <tr *ngFor="let d of lineChartData">
-        <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
-      </tr>
-    </table>
-    <button (click)="randomize()">CLICK</button>
+  <div class="col-md-4">
+    <div class="jumbotron">
+      <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="lineChartData_sub_mel">
+  <div class="col-md-8">
+    <div style="display: block; ">
+      <canvas baseChart [datasets]="lineChartData_sub_mel" [labels]="lineChartLabels_period" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="jumbotron">
+      <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="jumbotron">
+    <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6" *ngIf="baseChartData_mel">
+    <div style="display: block">
+      <canvas baseChart [datasets]="baseChartData_mel" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+    </div>
+  </div>
+  <div class="col-md-6" *ngIf="baseChartData_syd">
+    <div style="display: block">
+      <canvas baseChart [datasets]="baseChartData_syd" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="jumbotron">
+    <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8" *ngIf="baseChartData_mel_syd">
+    <div *ngIf="baseChartData_mel_syd.length >= 2">
+      <div style="display: block">
+        <canvas baseChart [datasets]="baseChartData_mel_syd" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="jumbotron">
+      <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+    </div>
   </div>
 </div>
