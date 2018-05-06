@@ -118,6 +118,82 @@ export class View3Component implements OnInit {
       ], label: 'Sydney'}
   ];
   
-  
+   //line chart
+  public lineChartData:Array<any> = [
+    {data: [7.41, 5.56, 12.96, 16.67, 3.70, 12.96, 16.67, 14.81, 9.26], label: 'Aurin'},
+    {data: [13.14, 1.92, 3.90, 5.13, 0.00, 12.00, 0.93, 1.64, 6.25], label: 'twitter'}
+  ];
 
+  public lineChartData2:Array<any> = [
+    {data: [20.00, 12.50, 15.00, 10.00, 2.50, 7.5, 15, 12.5, 5], label: 'Aurin'},
+    {data: [7.05, 5.77, 9.09, 2.56, 12.50, 8.00, 6.54, 13.11, 2.08], label: 'twitter'}
+  ];
+
+  public lineChartLabels:Array<any> = ['Inner', 'Inner-E', 'Inner-S', 'North East', 'North West', 'Outer East', 'South East', 'West', 'MP'];
+  public lineChartOptions:any = {
+    responsive: true
+  };
+
+  public lineChartLegend:boolean = true;
+  public lineChartType:string = 'line';
+
+
+  //bar3
+   public barChartData3 = [
+  {data:[39.27, 60.91, 63.09, 69.76, 72.49, 74.04, 74.64, 70.24, 76.33], label: 'Auto'},
+  {data:[6.24, 1.55, 1.70, 1.16, 0.71, 0.6, 0.56, 1.07, 0.56], label: 'Positive'}
+  ];
+
+  //stacked bar chart
+  public barChartOptions3:any = {
+  scaleShowVerticalLines: false,
+  responsive: true,
+  scales: {
+  xAxes: [{
+    stacked: true
+  }],
+  yAxes: [{
+    stacked: true,
+    display: true,
+    ticks:{
+          steps : 20,
+          min:35,
+          max : 80,
+    }
+  }]
+  }}
+
+    public barChartType3:string = 'bar';
+    public barChartLegend3:boolean = true;
+    public barChartLabels3:string[] = ['Inner', 'Inner-E', 'Inner-S', 'North-East', 'North-West', 'Outer-East', 'South-East', 'West', 'MP'];
+
+  //bar4
+  //bar3
+   public barChartData4 = [
+  {data:[5.28, 7.69, 9.09, 5.13, 29.17, 4.00, 47.66, 4.92, 12.50], label: 'Auto'},
+  {data:[15.04, 17.31, 12.99, 28.21, 12.50, 26.67, 12.15, 26.23, 16.67], label: 'Bike'}
+  ];
+
+  //stacked bar chart
+  public barChartOptions4:any = {
+  scaleShowVerticalLines: false,
+  responsive: true,
+  scales: {
+  xAxes: [{
+    stacked: true
+  }],
+  yAxes: [{
+    stacked: true,
+    display: true,
+    ticks:{
+          steps : 20,
+          min:0,
+          max : 80,
+    }
+  }]
+  }}
+
+    public barChartType4:string = 'bar';
+    public barChartLegend4:boolean = true;
+    public barChartLabels4:string[] = ['Inner', 'Inner-E', 'Inner-S', 'North-East', 'North-West', 'Outer-East', 'South-East', 'West', 'MP'];
 }

@@ -20,13 +20,10 @@ export class View2Component implements OnInit {
                 .subscribe(res => {this.mel_stream = res.json();
                  //console.log(this.mel_stream);
                  this.lineChartData= [
-                    {data: this.mel_stream['Data']['2012'], label: '2012'},
-                    {data: this.mel_stream['Data']['2013'], label: '2013'},
-                    {data:  this.mel_stream['Data']['2014'], label: '2014'},
-                    {data:  this.mel_stream['Data']['2014'], label: '2015'},
-                    {data:  this.mel_stream['Data']['2014'], label: '2016'},
-                    {data:  this.mel_stream['Data']['2014'], label: '2017'},
-                    {data:  this.mel_stream['Data']['2014'], label: '2018'},
+                    {data:  this.mel_stream['Data']['2015'], label: '2015'},
+                    {data:  this.mel_stream['Data']['2016'], label: '2016'},
+                    {data:  this.mel_stream['Data']['2017'], label: '2017'},
+                    {data:  this.mel_stream['Data']['2018'], label: '2018'},
                   ];
                        });
         this.http.get('../assets/Sub_Time_Mel_2018.json')

@@ -8,10 +8,18 @@
       <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
     </div>
 </div>
+
 <div class="row" *ngIf="income_education_mel">
-    <div style="display: block;">
-      <canvas baseChart [datasets]="income_education_mel" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
-    </div>
+    <div style="display: block">
+    <canvas baseChart
+            [datasets]="barChartData2"
+            [labels]="barChartLabels"
+            [options]="barChartOptions2"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></canvas>
+  </div>
 </div>
 <div class="row">
    <div class="jumbotron">
