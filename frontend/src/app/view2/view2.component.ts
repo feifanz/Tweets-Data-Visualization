@@ -39,50 +39,52 @@ export class View2Component implements OnInit {
                     );
                   }
                   console.log(this.lineChartData_sub_mel);
-              }); 
+              });
 
         this.http.get('../assets/Search_Mel_Time_Output.json')
-                .subscribe(res => {this.baseChartData_mel = 
+                .subscribe(res => {this.baseChartData_mel =
                    [
                     {data: res.json()["Percent_Data"], label: 'Melbourne'},
                   ];
                   this.baseChartData_mel_syd = [{data: res.json()["Count_Data"], label: 'Melbourne'}]
-              });    
+              });
 
         this.http.get('../assets/Search_Syd_Time_Output.json')
-                .subscribe(res => {this.baseChartData_syd = 
+                .subscribe(res => {this.baseChartData_syd =
                    [
                     {data: res.json()["Percent_Data"], label: 'Sydney'},
                   ];
                   this.baseChartData_mel_syd.push({data: res.json()["Count_Data"], label: 'Sydney'});
                   //console.log(console.log(this.baseChartData_mel_syd));
-              });  
+              });
 
- 
+
 
    }
 
 
   ngOnInit() {
+    const map: HTMLElement = document.getElementById('map');
+    map.style.display= 'none';
 
   }
 
   // lineChart
-  public lineChartLabels:Array<any> = ['00', '01', '02', '03', '04', '05', '06','07', '08', '09', '10', '11', 
+  public lineChartLabels:Array<any> = ['00', '01', '02', '03', '04', '05', '06','07', '08', '09', '10', '11',
   '12', '13','14', '15', '16', '17', '18', '19', '20','21','22','23'];
    // lineChart
   public lineChartLabels_period:Array<any> = ['0-2', '3-5', '6-8', '9-11', '12-14', '15-17', '18-20','21-23'];
   public lineChartOptions:any = {
     responsive: true,
   };
-  
+
   public lineChartLegend:boolean = true;
   public lineChartType:string = 'line';
- 
 
- 
+
+
   //pieChart_1
-  public pieChartLabels:string[] = ['00', '01', '02', '03', '04', '05', '06','07', '08', '09', '10', '11', 
+  public pieChartLabels:string[] = ['00', '01', '02', '03', '04', '05', '06','07', '08', '09', '10', '11',
   '12', '13','14', '15', '16', '17', '18', '19', '20','21','22','23'];
   public pieChartType:string = 'pie';
 
@@ -92,12 +94,12 @@ export class View2Component implements OnInit {
     scaleShowVerticalLines: false,
     responsive: true
   };
-  public barChartLabels:string[] = ['00', '01', '02', '03', '04', '05', '06','07', '08', '09', '10', '11', 
+  public barChartLabels:string[] = ['00', '01', '02', '03', '04', '05', '06','07', '08', '09', '10', '11',
   '12', '13','14', '15', '16', '17', '18', '19', '20','21','22','23'];
   public barChartType:string = 'bar';
   public barChartLegend:boolean = true;
- 
+
  //basechart_syn
 
-  
+
 }
