@@ -73,72 +73,239 @@
 <body>
   <app-root>Loading...</app-root>
 
-
-
-  <!--Top Bar-->
   <div id="controls" class="nicebox">
     <div>
       <select id="census-variable">
-        <option value="https://storage.googleapis.com/mapsdevsite/json/DP02_0066PE">Percent of population over 25 that completed high
-          school</option>
-        <option value="https://storage.googleapis.com/mapsdevsite/json/DP05_0017E">Median age</option>
-        <option value="https://storage.googleapis.com/mapsdevsite/json/DP05_0001E">Total population</option>
-        <option value="https://storage.googleapis.com/mapsdevsite/json/DP02_0016E">Average family size</option>
-        <option value="https://storage.googleapis.com/mapsdevsite/json/DP03_0088E">Per-capita income</option>
+        <option value="pos">Melbourne Positive</option>
+        <option value="neu">Melbourne neutro</option>
+        <option value="neg">Melbourne neg</option>
       </select>
     </div>
     <div id="legend">
       <div id="census-min">min</div>
-      <div class="color-key"><span id="data-caret">◆</span></div>
+      <div class="color-key"><span id="data-caret">&#x25c6;</span></div>
       <div id="census-max">max</div>
     </div>
   </div>
- <div id="data-box" class="nicebox">
+  <div id="data-box" class="nicebox">
     <label id="data-label" for="data-value"></label>
     <span id="data-value"></span>
   </div>
-
-
   <div id="map"></div>
-
   <script>
+    var mapStyle = [{
+      'stylers': [{'visibility': 'off'}]
+    }, {
+      'featureType': 'landscape',
+      'elementType': 'geometry',
+      'stylers': [{'visibility': 'on'}, {'color': '#fcfcfc'}]
+    }, {
+      'featureType': 'water',
+      'elementType': 'geometry',
+      'stylers': [{'visibility': 'on'}, {'color': '#bfd4ff'}]
+    }];
+    var map;
+    var censusMin = Number.MAX_VALUE, censusMax = -Number.MAX_VALUE;
 
-    // This example uses the Google Maps JavaScript API's Data layer
-    // to create a rectangular polygon with 2 holes in it.
-
+    var geodata="{\"rows\":[\n" +
+      "{\"key\":[\"Melbourne - Inner\",\"neg\"],\"value\":{\"sum\":0.086}},\n" +
+      "{\"key\":[\"Melbourne - Inner\",\"neu\"],\"value\":{\"sum\":0.476}},\n" +
+      "{\"key\":[\"Melbourne - Inner\",\"pos\"],\"value\":{\"sum\":0.437}},\n" +
+      "{\"key\":[\"Melbourne - Inner East\",\"neg\"],\"value\":{\"sum\":0.099}},\n" +
+      "{\"key\":[\"Melbourne - Inner East\",\"neu\"],\"value\":{\"sum\":0.467}},\n" +
+      "{\"key\":[\"Melbourne - Inner East\",\"pos\"],\"value\":{\"sum\":0.433}},\n" +
+      "{\"key\":[\"Melbourne - Inner South\",\"neg\"],\"value\":{\"sum\":0.095}},\n" +
+      "{\"key\":[\"Melbourne - Inner South\",\"neu\"],\"value\":{\"sum\":0.454}},\n" +
+      "{\"key\":[\"Melbourne - Inner South\",\"pos\"],\"value\":{\"sum\":0.45}},\n" +
+      "{\"key\":[\"Melbourne - North East\",\"neg\"],\"value\":{\"sum\":0.104}},\n" +
+      "{\"key\":[\"Melbourne - North East\",\"neu\"],\"value\":{\"sum\":0.476}},\n" +
+      "{\"key\":[\"Melbourne - North East\",\"pos\"],\"value\":{\"sum\":0.419}},\n" +
+      "{\"key\":[\"Melbourne - North West\",\"neg\"],\"value\":{\"sum\":0.119}},\n" +
+      "{\"key\":[\"Melbourne - North West\",\"neu\"],\"value\":{\"sum\":0.503}},\n" +
+      "{\"key\":[\"Melbourne - North West\",\"pos\"],\"value\":{\"sum\":0.376}},\n" +
+      "{\"key\":[\"Melbourne - Outer East\",\"neg\"],\"value\":{\"sum\":0.065}},\n" +
+      "{\"key\":[\"Melbourne - Outer East\",\"neu\"],\"value\":{\"sum\":0.421}},\n" +
+      "{\"key\":[\"Melbourne - Outer East\",\"pos\"],\"value\":{\"sum\":0.513}},\n" +
+      "{\"key\":[\"Melbourne - South East\",\"neg\"],\"value\":{\"sum\":0.101}},\n" +
+      "{\"key\":[\"Melbourne - South East\",\"neu\"],\"value\":{\"sum\":0.434}},\n" +
+      "{\"key\":[\"Melbourne - South East\",\"pos\"],\"value\":{\"sum\":0.464}},\n" +
+      "{\"key\":[\"Melbourne - West\",\"neg\"],\"value\":{\"sum\":0.039}},\n" +
+      "{\"key\":[\"Melbourne - West\",\"neu\"],\"value\":{\"sum\":0.700}},\n" +
+      "{\"key\":[\"Melbourne - West\",\"pos\"],\"value\":{\"sum\":0.259}},\n" +
+      "{\"key\":[\"Mornington Peninsula\",\"neg\"],\"value\":{\"sum\":0.111}},\n" +
+      "{\"key\":[\"Mornington Peninsula\",\"neu\"],\"value\":{\"sum\":0.408}},\n" +
+      "{\"key\":[\"Mornington Peninsula\",\"pos\"],\"value\":{\"sum\":0.479}}\n" +
+      "]}\n"
     function initMap() {
-      var map = new google.maps.Map(document.getElementById('map'), {
+
+      // load the map
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: -37.8547049, lng:  144.9665918},
         zoom: 9,
-        center: {lat: -37.8547049, lng: 144.9665918},
 
       });
-      //load melbourne grid data
-      map.data.loadGeoJson('/assets/MGeo.json');
 
 
-      map.data.setStyle({
-        icon: '//example.com/path/to/image.png',
-        fillColor: 'green'
-      });
+      // set up the style rules and events for google.maps.Data
+      map.data.setStyle(styleFeature);
+      map.data.addListener('mouseover', mouseInToRegion);
+      map.data.addListener('mouseout', mouseOutOfRegion);
 
       map.data.addListener('click', function(event) {
         map.data.revertStyle()
         map.data.overrideStyle(event.feature, {fillColor: 'red'});
       });
+      
 
-      // Set mouseover event for each feature.
-      map.data.addListener('mouseover', function(event) {
-        document.getElementById('info-box').textContent =
-          event.feature.getProperty('letter');
+
+      // wire up the button
+      var selectBox = document.getElementById('census-variable');
+      google.maps.event.addDomListener(selectBox, 'change', function() {
+        clearCensusData();
+        loadCensusData(selectBox.options[selectBox.selectedIndex].value);
       });
 
-      console.log(map.data)
-    }
-  </script>
+      // state polygons only need to be loaded once, do them now
+      loadMapShapes();
 
+    }
+
+    /** Loads the state boundary polygons from a GeoJSON source. */
+    function loadMapShapes() {
+//      // load US state outline polygons from a GeoJson file
+//      map.data.loadGeoJson('https://storage.googleapis.com/mapsdevsite/json/states.js', { idPropertyName: 'STATE' });
+      //load melbourne grid data
+      map.data.loadGeoJson('/assets/MelGeo.json',{ idPropertyName: 'sa4_name16'});
+      // wait for the request to complete by listening for the first feature to be
+      // added
+//      google.maps.event.addListenerOnce(map.data, 'addfeature', function() {
+//        google.maps.event.trigger(document.getElementById('census-variable'),
+//          'change');
+//      });
+    }
+
+    /**
+     * Loads the census data from a simulated API call to the US Census API.
+     *
+     * @param {string} variable
+     */
+    function loadCensusData(variable) {
+        meldata = JSON.parse(geodata);
+
+        meldata['rows'].forEach(function(row) {
+          key=row['key'][0]
+          sentiment=row['key'][1]
+          value=row['value']['sum']
+          if(sentiment==variable) {
+            map.data
+              .getFeatureById(key)
+              .setProperty('SentimentPercentage', value);
+          }
+        });
+
+        // update and display the legend
+        document.getElementById('census-min').textContent =
+         '0%';
+        document.getElementById('census-max').textContent =
+          '100%';
+    }
+
+    /** Removes census data from each shape on the map and resets the UI. */
+    function clearCensusData() {
+      censusMin = Number.MAX_VALUE;
+      censusMax = -Number.MAX_VALUE;
+      map.data.forEach(function(row) {
+        row.setProperty('SentimentPercentage', undefined);
+      });
+      document.getElementById('data-box').style.display = 'none';
+      document.getElementById('data-caret').style.display = 'none';
+    }
+
+    /**
+     * Applies a gradient style based on the 'census_variable' column.
+     * This is the callback passed to data.setStyle() and is called for each row in
+     * the data set.  Check out the docs for Data.StylingFunction.
+     *
+     * @param {google.maps.Data.Feature} feature
+     */
+    function styleFeature(feature) {
+      var low = [5, 69, 54];  // color of smallest datum
+      var high = [151, 83, 34];   // color of largest datum
+
+      // delta represents where the value sits between the min and max
+      var delta = (feature.getProperty('SentimentPercentage') - 0)
+
+      var color = [];
+      for (var i = 0; i < 3; i++) {
+        // calculate an integer color based on the delta
+        color[i] = (high[i] - low[i]) * delta + low[i];
+      }
+
+      // determine whether to show this shape or not
+      var showRow = true;
+      if (feature.getProperty('SentimentPercentage') == null ||
+        isNaN(feature.getProperty('SentimentPercentage'))) {
+        showRow = false;
+      }
+
+      var outlineWeight = 0.5, zIndex = 1;
+      if (feature.getProperty('sa4_name16') === 'hover') {
+        outlineWeight = zIndex = 2;
+      }
+
+      return {
+        strokeWeight: outlineWeight,
+        strokeColor: '#fff',
+        zIndex: zIndex,
+        fillColor: 'hsl(' + color[0] + ',' + color[1] + '%,' + color[2] + '%)',
+        fillOpacity: 0.75,
+        visible: showRow
+      };
+    }
+
+    /**
+     * Responds to the mouse-in event on a map shape (state).
+     *
+     * @param {?google.maps.MouseEvent} e
+     */
+    function mouseInToRegion(e) {
+      // set the hover state so the setStyle function can change the border
+      e.feature.setProperty('sa4_name16', 'hover');
+
+      var percent = (e.feature.getProperty('SentimentPercentage') - 0);
+
+      // update the label
+      document.getElementById('data-label').textContent =
+        e.feature.getProperty('sa4_name16');
+      document.getElementById('data-value').textContent =
+        e.feature.getProperty('SentimentPercentage').toLocaleString();
+      document.getElementById('data-box').style.display = 'block';
+      document.getElementById('data-caret').style.display = 'block';
+      document.getElementById('data-caret').style.paddingLeft = percent + '%';
+    }
+
+    /**
+     * Responds to the mouse-out event on a map shape (state).
+     *
+     * @param {?google.maps.MouseEvent} e
+     */
+    function mouseOutOfRegion(e) {
+      // reset the hover state, returning the border to normal
+      e.feature.setProperty('sa4_name16', 'normal');
+    }
+
+
+
+
+
+
+  </script>
   <script async defer
           src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOHOx7ILXrHhu49qNIvqjepo1oEjobAc&callback=initMap">
   </script>
+
+
+
 
 </body>
 
