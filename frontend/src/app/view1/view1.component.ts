@@ -8,7 +8,7 @@ import {Http} from '@angular/http';
 })
 export class View1Component implements OnInit {
   swearing_education_mel;
- 
+
   constructor(private http:Http) {
     this.http.get('../assets/sa4_swearing.json')
                 .subscribe(res => {
@@ -27,6 +27,8 @@ export class View1Component implements OnInit {
   }
 
   ngOnInit() {
+    const map: HTMLElement = document.getElementById('map');
+    map.style.display= 'none';
   }
   //line chart
   public income_education_mel = [

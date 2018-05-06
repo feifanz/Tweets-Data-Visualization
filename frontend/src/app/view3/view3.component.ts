@@ -9,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
 export class View3Component implements OnInit {
 
    swearing_education_mel;
- 
+
   constructor() {}
 
   ngOnInit() {
+    const map: HTMLElement = document.getElementById('map');
+    map.style.display= 'none';
   }
 
   public barChartOptions:any = {
@@ -51,9 +53,9 @@ export class View3Component implements OnInit {
       "atheism"];
   public barChartType:string = 'bar';
   public barChartLegend:boolean = true;
- 
+
   public barChartData:any[] = [
-    {data: [ 
+    {data: [
       "10.87",
       "11.31",
       "5.72",
@@ -98,7 +100,7 @@ export class View3Component implements OnInit {
   ];
 
   public barChartData2:any[] = [
-    {data: [ 
+    {data: [
       "22.74",
       "16.02",
       "13.70",
@@ -117,6 +119,7 @@ export class View3Component implements OnInit {
       "12.46"
       ], label: 'Sydney'}
   ];
+
   
    //line chart
   public lineChartData:Array<any> = [
@@ -192,7 +195,6 @@ export class View3Component implements OnInit {
     }
   }]
   }}
-
     public barChartType4:string = 'bar';
     public barChartLegend4:boolean = true;
     public barChartLabels4:string[] = ['Inner', 'Inner-E', 'Inner-S', 'North-East', 'North-West', 'Outer-East', 'South-East', 'West', 'MP'];

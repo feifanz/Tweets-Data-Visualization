@@ -11,7 +11,8 @@ import { ViewService } from './view.service';
 import { View2Component } from './view2/view2.component';
 import { View3Component } from './view3/view3.component';
 import { DashbordComponent } from './dashbord/dashbord.component';
-import { MapviewComponent } from './mapview/mapview.component'
+import { MapviewComponent } from './mapview/mapview.component';
+import { GooglemapviewComponent } from './googlemapview/googlemapview.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +20,8 @@ import { MapviewComponent } from './mapview/mapview.component'
     View2Component,
     View3Component,
     DashbordComponent,
-    MapviewComponent
+    MapviewComponent,
+    GooglemapviewComponent
   ],
   imports: [
     BrowserModule,
