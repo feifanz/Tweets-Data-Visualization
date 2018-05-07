@@ -62,7 +62,7 @@ class MyStreamListener(tweepy.StreamListener):
                 sentiment = analyzer.polarity_scores(ntext)
                 swearing = lable_swearing(ntext)
                 # generate new tweeter
-                topic = give_label(text)
+                topic = give_label(ntext)
                 time_tag = time_label(ntime)
                 suburb = give_suburb(ncoordinates)
                 ndoc = {'_id': nid, 'text': ntext, 'user': nuser,
