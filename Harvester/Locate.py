@@ -1,32 +1,24 @@
-import shapefile
-from shapely.geometry import Point, Polygon
+import fiona
+from shapely.geometry import Point, shape
 
 # read shape file
-shape = shapefile.Reader("melb_suburbs.shp")
-
-# a list of records, each record represents a suburb
-records = shape.records()
-shapes = shape.shapeRecords()
+sa4 = fiona.open("sa4_melb.shp", 'r')
 
 # build suburb dictionary
-suburb_Dict = {}
-for i in range(len(shape.shapeRecords())):
-    try:
-        subBoundary = Polygon(shapes[i].shape.__geo_interface__['coordinates'][0])
-    except:
-        subBoundary = Polygon((shape.shapeRecords()[i].shape.__geo_interface__['coordinates'][0][0]))
-    suburb_Dict[records[i][-1]] = subBoundary
-    print(records[i][-1])
+sa4_Dict = {}
+for i in range(len(sa4)):
+    subBoundary = shape(sa4[i]['geometry'])
+    sa4_Dict[sa4[i]['properties']['sa4_name16']] = subBoundary
 
-print("Total", len(suburb_Dict))
-print("Dictionary: ", suburb_Dict)
+print("Total", len(sa4_Dict))
+print("Dictionary: ", sa4_Dict)
 
 # give label of suburb
 def give_suburb(coordinates):
     if coordinates:
         point = Point(coordinates)
-        for item in suburb_Dict:
-            if point.within(suburb_Dict[item]):
-                sub = item
-                return sub
+        for item in sa4_Dict:
+            if point.within(sa4_Dict[item]):
+                sa4 = item
+                return sa4
 
