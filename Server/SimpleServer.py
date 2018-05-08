@@ -1,21 +1,22 @@
 from flask import Flask
 from flask_restful import Resource, Api
+import json
 
 app = Flask(__name__)
 api = Api(app)
 
 
-class View1(Resource):
-    def get(self):
-        return {'hello': 'world'}
+class TodoSimple(Resource):
+    def get(self, todo_id):
+        try:
+            fo = open("./data/" + todo_id, "r+")
+            content = fo.read()
+            j = json.loads(content)
+            return j
+        except:
+            return "wrong resource name"
 
-class View2(Resource):
-    def get(self):
-        return {'hello2': 'world2'}
-
-api.add_resource(View1, '/api/view1')
-api.add_resource(View2, '/api/view2')
-
+api.add_resource(TodoSimple, '/api/<string:todo_id>')
 
 if __name__ == '__main__':
     app.run(debug=True)
