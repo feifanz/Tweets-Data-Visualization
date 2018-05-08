@@ -103,11 +103,11 @@
       map.data.addListener('mouseover', mouseInToRegion);
       map.data.addListener('mouseout', mouseOutOfRegion);
 
-//      map.data.addListener('click', function(event) {
-//        map.data.revertStyle()
-//        map.data.overrideStyle(event.feature, {fillColor: 'red'});
-//      });
-//
+      map.data.addListener('click', function(event) {
+        map.data.revertStyle()
+        map.data.overrideStyle(event.feature, {fillColor: 'red'});
+      });
+
 //
       var posbutton=document.getElementById('positivetbutton');
       var neubutton=document.getElementById('neubutton');
@@ -126,23 +126,6 @@
         loadCensusData(negbutton.value);
       });
 
-//      var infowindow = new google.maps.InfoWindow();
-//
-//      // When the user clicks, open an infowindow
-//      map.data.addListener('mouseover', function(event) {
-//        var myHTML = event.feature.getProperty("SentimentPercentage");
-//        infowindow.setContent("<div style='width:150px; text-align: center;'>"+myHTML+"</div>");
-//        infowindow.setPosition(event.feature.getGeometry().getAt(0).getAt(0));
-//        infowindow.setOptions({pixelOffset: new google.maps.Size(0,-30)});
-//        infowindow.open(map);
-//      })
-
-//      // wire up the button
-//      var selectBox = document.getElementById('census-variable');
-//      google.maps.event.addDomListener(selectBox, 'change', function() {
-//        clearCensusData();
-//        loadCensusData(selectBox.options[selectBox.selectedIndex].value);
-//      });
 
       // state polygons only need to be loaded once, do them now
       loadMapShapes();
@@ -151,16 +134,8 @@
 
     /** Loads the state boundary polygons from a GeoJSON source. */
     function loadMapShapes() {
-//      // load US state outline polygons from a GeoJson file
-//      map.data.loadGeoJson('https://storage.googleapis.com/mapsdevsite/json/states.js', { idPropertyName: 'STATE' });
-      //load melbourne grid data
       map.data.loadGeoJson('/assets/MelGeo.json',{ idPropertyName: 'sa4_name16'});
-      // wait for the request to complete by listening for the first feature to be
-      // added
-//      google.maps.event.addListenerOnce(map.data, 'addfeature', function() {
-//        google.maps.event.trigger(document.getElementById('census-variable'),
-//          'change');
-//      });
+
     }
 
     /**
@@ -247,7 +222,7 @@
       }
 
       var outlineWeight = 0.5, zIndex = 1;
-      if (feature.getProperty('sa4_name16') === 'hover') {
+      if (feature.getProperty('featurehover') === 'hover') {
         outlineWeight = zIndex = 2;
       }
 
@@ -267,8 +242,8 @@
      * @param {?google.maps.MouseEvent} e
      */
     function mouseInToRegion(e) {
-      // set the hover state so the setStyle function can change the border
-//      e.feature.setProperty('sa4_name16',e.feature.getProperty('sa4_name16')+ e.feature.getProperty('SentimentName') );
+//       set the hover state so the setStyle function can change the border
+      e.feature.setProperty('featurehover','hover' );
 
       var percent = (e.feature.getProperty('SentimentPercentage') - 0);
       // update the label
@@ -289,16 +264,11 @@
      */
     function mouseOutOfRegion(e) {
       // reset the hover state, returning the border to normal
-//      e.feature.setProperty('sa4_name16', 'normal');
+      e.feature.setProperty('featurehover', 'normal');
       document.getElementById('data-box').style.display = 'none';
       document.getElementById('data-caret').style.display = 'none';
 
     }
-
-
-
-
-
 
   </script>
   <script async defer
