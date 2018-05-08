@@ -125,6 +125,7 @@
         clearCensusData();
         loadCensusData(negbutton.value);
       });
+
 //      var infowindow = new google.maps.InfoWindow();
 //
 //      // When the user clicks, open an infowindow
@@ -178,16 +179,17 @@
             map.data
               .getFeatureById(key)
               .setProperty('SentimentPercentage', value);
+
             var sentimentname=''
             switch(sentiment){
               case 'pos':
-                sentimentname='Positive Twitter Percentage';
+                sentimentname='Positive Percentage';
                     break;
               case 'neu':
-                sentimentname='Neutral Twitter Percentage';
+                sentimentname='Neutral Percentage';
                 break;
               case 'neg':
-                sentimentname='Negtive Twitter Percentage';
+                sentimentname='Negtive Percentage';
                 break;
               default:
                 sentimentname='';
@@ -266,13 +268,12 @@
      */
     function mouseInToRegion(e) {
       // set the hover state so the setStyle function can change the border
-      e.feature.setProperty('sa4_name16',e.feature.getProperty('SentimentName') );
+//      e.feature.setProperty('sa4_name16',e.feature.getProperty('sa4_name16')+ e.feature.getProperty('SentimentName') );
 
       var percent = (e.feature.getProperty('SentimentPercentage') - 0);
-
       // update the label
       document.getElementById('data-label').textContent =
-        e.feature.getProperty('sa4_name16');
+        e.feature.getProperty('sa4_name16')+' '+e.feature.getProperty('SentimentName');
       document.getElementById('data-value').textContent =
         (e.feature.getProperty('SentimentPercentage')*100).toLocaleString()+'%';
       document.getElementById('data-box').style.display = 'block';
@@ -288,7 +289,10 @@
      */
     function mouseOutOfRegion(e) {
       // reset the hover state, returning the border to normal
-      e.feature.setProperty('sa4_name16', 'normal');
+//      e.feature.setProperty('sa4_name16', 'normal');
+      document.getElementById('data-box').style.display = 'none';
+      document.getElementById('data-caret').style.display = 'none';
+
     }
 
 
