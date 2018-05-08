@@ -13,6 +13,10 @@ export class GooglemapviewComponent implements OnInit {
   ngOnInit() {
     const map: HTMLElement = document.getElementById('map');
     map.style.display = 'block';
+    map.style.width = '80%';
+    map.style.height='700px';
+    map.style.marginLeft='auto';
+    map.style.marginRight='auto';
   }
 
 }
