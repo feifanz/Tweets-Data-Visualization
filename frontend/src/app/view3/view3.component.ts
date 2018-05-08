@@ -31,26 +31,26 @@ export class View3Component implements OnInit {
       "others"
   ];
   public barChartLabels:string[] = [
-      "christian",
-      "forsale",
-      "autos",
-      "motorcycles",
-      "baseball",
-      "hockey",
-      "misc",
-      "guns",
-      "mideast",
-      "sci.crypt",
-      "electronics",
-      "medicine",
-      "space",
-      "comp.graphics",
-      "ms-windows.misc",
-      "ibm.pc.hardware",
-      "mac.hardware",
-      "windows.x",
-      "religion.misc",
-      "atheism"];
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20"];
   public barChartType:string = 'bar';
   public barChartLegend:boolean = true;
 
