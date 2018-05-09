@@ -1,3 +1,11 @@
+'''
+This code is written by:
+Team SweatHeart, Melbourne, Yi Ding, 839679
+Team SweatHeart, Melbourne, Jianying Zhang, 799672
+Team SweatHeart, Melbourne, Feifan Zhang, 807480
+Team SweatHeart, Melbourne, Keren He, 865255
+Team SweatHeart, Melbourne, Jinhang Li, 867117
+'''
 from couchdb import Server
 from config import *
 import json

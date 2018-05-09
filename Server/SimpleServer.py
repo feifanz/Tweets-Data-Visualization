@@ -1,3 +1,11 @@
+'''
+This code is written by:
+Team SweatHeart, Melbourne, Yi Ding, 839679
+Team SweatHeart, Melbourne, Jianying Zhang, 799672
+Team SweatHeart, Melbourne, Feifan Zhang, 807480
+Team SweatHeart, Melbourne, Keren He, 865255
+Team SweatHeart, Melbourne, Jinhang Li, 867117
+'''
 from flask import Flask
 from flask_restful import Resource, Api
 import json
@@ -19,4 +27,4 @@ class TodoSimple(Resource):
 api.add_resource(TodoSimple, '/api/<string:todo_id>')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0')
