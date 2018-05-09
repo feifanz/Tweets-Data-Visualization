@@ -55,28 +55,7 @@ export class View3Component implements OnInit {
   public barChartLegend:boolean = true;
 
   public barChartData:any[] = [
-    {data: [
-      "10.87",
-      "11.31",
-      "5.72",
-      "8.42",
-      "7.74",
-      "10.11",
-      "6.57",
-      "2.65",
-      "2.55",
-      "2.09",
-      "6.07",
-      "7.51",
-      "8.12",
-      "2.66",
-      "1.24",
-      "0.66",
-      "2.08",
-      "1.19",
-      "0.87",
-      "1.59"], label: 'Melbourne'},
-    {data: [
+    {data: [  
       "8.80",
       "5.97",
       "7.24",
@@ -96,7 +75,30 @@ export class View3Component implements OnInit {
       "2.20",
       "1.24",
       "0.65",
-      "1.60"], label: 'Sydney'}
+      "1.60"
+   ], label: 'Melbourne'},
+    {data: [  
+      "10.87",
+      "11.31",
+      "5.72",
+      "8.42",
+      "7.74",
+      "10.11",
+      "6.57",
+      "2.65",
+      "2.55",
+      "2.09",
+      "6.07",
+      "7.51",
+      "8.12",
+      "2.66",
+      "1.24",
+      "0.66",
+      "2.08",
+      "1.19",
+      "0.87",
+      "1.59"
+   ], label: 'Sydney'}
   ];
 
   public barChartData2:any[] = [
@@ -106,8 +108,8 @@ export class View3Component implements OnInit {
       "13.70",
       "22.48",
       "8.04",
-      "6.62",
-      "10.40"
+      "5.97",
+      "11.06"
       ], label: 'Melbourne'},
     {data: [
       "17.85",
@@ -115,8 +117,8 @@ export class View3Component implements OnInit {
       "11.76",
       "23.78",
       "7.82",
-      "12.18",
-      "12.46"
+      "11.31",
+      "13.33"
       ], label: 'Sydney'}
   ];
 
@@ -144,7 +146,7 @@ export class View3Component implements OnInit {
   //bar3
    public barChartData3 = [
   {data:[39.27, 60.91, 63.09, 69.76, 72.49, 74.04, 74.64, 70.24, 76.33], label: 'Auto'},
-  {data:[6.24, 1.55, 1.70, 1.16, 0.71, 0.6, 0.56, 1.07, 0.56], label: 'Positive'}
+  {data:[6.24, 1.55, 1.70, 1.16, 0.71, 0.6, 0.56, 1.07, 0.56], label: 'Bike'}
   ];
 
   //stacked bar chart

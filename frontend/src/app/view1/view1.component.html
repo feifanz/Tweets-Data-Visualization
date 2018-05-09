@@ -1,47 +1,41 @@
 <div class="row" *ngIf="swearing_education_mel">
+  <div class="col-md-8">
     <div style="display: block;">
       <canvas baseChart [datasets]="swearing_education_mel" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
     </div>
-</div>
-<div class="row">
-   <div class="jumbotron">
-      <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-    </div>
-</div>
-
-<div class="row" *ngIf="income_education_mel">
-    <div style="display: block">
-    <canvas baseChart
-            [datasets]="barChartData2"
-            [labels]="barChartLabels"
-            [options]="barChartOptions2"
-            [legend]="barChartLegend"
-            [chartType]="barChartType"
-            (chartHover)="chartHovered($event)"
-            (chartClick)="chartClicked($event)"></canvas>
-  </div>
-</div>
-<div class="row">
-   <div class="jumbotron">
-      <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-    </div>
-</div>
-
-<div class="row" *ngIf="income_education_mel">
-  <div class="col-md-8">
-    <div style="display: block">
-    <canvas baseChart
-            [datasets]="barChartData"
-            [labels]="barChartLabels"
-            [options]="barChartOptions"
-            [legend]="barChartLegend"
-            [chartType]="barChartType"
-            ></canvas>
-  </div>
   </div>
   <div class="col-md-4">
     <div class="jumbotron">
-      <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+      <h4>Scenario 1</h4>
+      <p class="text-justify">Relation between tweets amounts with swearing words and education level in each suburb of Melbourne</p>
+    </div>
+  </div>
+</div>
+<hr/>
+<div class="row" *ngIf="income_education_mel">
+  <div class="col-md-4">
+    <div class="jumbotron">
+      <h4>Scenario 2</h4>
+      <p>Positive, Negative,and Neutral tweets distribution in each suburb of Melbourne</p>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div style="display: block">
+      <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+    </div>
+  </div>
+</div>
+<hr/>
+<div class="row" *ngIf="income_education_mel">
+  <div class="col-md-8">
+    <div style="display: block">
+      <canvas baseChart [datasets]="barChartData2" [labels]="barChartLabels" [options]="barChartOptions2" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="jumbotron">
+      <h4>Scenario 3</h4>
+      <p>Relation between happiness rate and socio-economic index  in Melbourne suburbs</p>
     </div>
   </div>
 </div>

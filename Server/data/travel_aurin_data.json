@@ -1,0 +1,47 @@
+[
+  {
+    "sa4": "Melbourne - Inner",
+    "auto": "39.27%",
+    "bike": "6.24%"
+  },
+  {
+    "sa4": "Melbourne - Inner East",
+    "auto": "60.91%",
+    "bike": "1.55%"
+  },
+  {
+    "sa4": "Melbourne - Inner South",
+    "auto": "63.09%",
+    "bike": "1.70%"
+  },
+  {
+    "sa4": "Melbourne - North East",
+    "auto": "69.76%",
+    "bike": "1.16%"
+  },
+  {
+    "sa4": "Melbourne - North West",
+    "auto": "72.49%",
+    "bike": "0.71%"
+  },
+  {
+    "sa4": "Melbourne - Outer East",
+    "auto": "74.04%",
+    "bike": "0.60%"
+  },
+  {
+    "sa4": "Melbourne - South East",
+    "auto": "74.64%",
+    "bike": "0.56%"
+  },
+  {
+    "sa4": "Melbourne - West",
+    "auto": "70.24%",
+    "bike": "1.07%"
+  },
+  {
+    "sa4": "Mornington Peninsula",
+    "auto": "76.33%",
+    "bike": "0.56%"
+  }
+]

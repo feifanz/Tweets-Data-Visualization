@@ -36,7 +36,7 @@ export class View1Component implements OnInit {
   {data:[0.437,0.433,0.45,0.419,0.376,0.513,0.464,0.259,0.479], label: 'Positive'}
   ];
 
-  public lineChartLabels:Array<any> = ['Inner', 'Inner East', 'Inner South', 'North East', 'North West', 'Outer East', 'South East', 'West', 'Mornington Peninsula'];
+  public lineChartLabels:Array<any> = ['Inner', 'Inner-E', 'Inner-S', 'North-E', 'North-W', 'Outer-E', 'South-E', 'West', 'MP'];
   public lineChartOptions:any = {
     responsive: true
   };
@@ -58,7 +58,7 @@ export class View1Component implements OnInit {
   }
 
   };
-  public barChartLabels:string[] = ['Inner', 'Inner East', 'Inner South', 'North East', 'North West', 'Outer East', 'South East', 'West', 'Mornington Peninsula'];
+  public barChartLabels:string[] = ['Inner', 'Inner-E', 'Inner-S', 'North-E', 'North-W', 'Outer-E', 'South-E', 'West', 'MP'];
   public barChartType:string = 'bar';
   public barChartLegend:boolean = true;
 

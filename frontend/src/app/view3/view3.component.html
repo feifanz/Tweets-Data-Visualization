@@ -2,6 +2,28 @@
   <div class="col-md-8">
     <div>
       <div style="display: block">
+        <canvas baseChart [datasets]="barChartData2" [labels]="barChartLabels2" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="jumbotron">
+      <h4>Big Topics</h4>
+      <p>Percentages of tweets under 7 general topics in Sydney and Melbourne</p>
+    </div>
+  </div>
+</div>
+<hr/>
+<div class="row">
+  <div class="jumbotron">
+    <h4>Small Topics</h4>
+    <p>Percentages of tweets under 20 detailed topics in Sydney and Melbourne</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8">
+    <div>
+      <div style="display: block">
         <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
       </div>
     </div>
@@ -113,23 +135,11 @@
     </table>
   </div>
 </div>
+<hr/>
 <div class="row">
-   <div class="jumbotron">
-      <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-    </div>
-</div>
-<div class="row">
-  <div class="col-md-4">
-    <div class="jumbotron">
-      <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-    </div>
-  </div>
-  <div class="col-md-8">
-    <div>
-      <div style="display: block">
-        <canvas baseChart [datasets]="barChartData2" [labels]="barChartLabels2" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
-      </div>
-    </div>
+  <div class="jumbotron">
+    <h4>Baseball and Hockey</h4>
+    <p>Tweets about Hockey and Baseball and the Sports Facilities in Melbourne</p>
   </div>
 </div>
 <div class="row">
@@ -146,12 +156,28 @@
     </div>
   </div>
 </div>
+<hr>
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-8">
     <h2>Travel</h2>
     <canvas baseChart [datasets]="barChartData3" [labels]="barChartLabels3" [options]="barChartOptions3" [legend]="barChartLegend3" [chartType]="barChartType3"></canvas>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-4">
+    <div class="jumbotron" style="margin-top: 100px;">
+      <h4>Travel to work</h4>
+      <p>Percentage of people cummuting with autos and bikes in SA4 areas of Melbourne</p>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-4">
+    <div class="jumbotron" style="margin-top: 100px;">
+      <h4>Topic: auto vs bike</h4>
+      <p>Percentage of tweets about autos and bikes</p>
+    </div>
+  </div>
+  <div class="col-md-8">
     <h2>Topic</h2>
     <canvas baseChart [datasets]="barChartData4" [labels]="barChartLabels4" [options]="barChartOptions4" [legend]="barChartLegend4" [chartType]="barChartType4"></canvas>
   </div>

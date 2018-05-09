@@ -1,0 +1,97 @@
+{  
+   "City":"Melbourne",
+   "Description":"the number of tweets per hour in each different suburbs in 2018",
+   "Chart":"Line Chart",
+   "Data":{  
+      "Inner":[  
+         281,
+         273,
+         334,
+         256,
+         195,
+         53,
+         65,
+         242
+      ],
+      "Inner East":[  
+         10,
+         9,
+         23,
+         4,
+         4,
+         0,
+         1,
+         8
+      ],
+      "Inner South":[  
+         19,
+         16,
+         29,
+         19,
+         8,
+         5,
+         4,
+         16
+      ],
+      "North East":[  
+         11,
+         8,
+         25,
+         15,
+         6,
+         2,
+         0,
+         8
+      ],
+      "North West":[  
+         13,
+         10,
+         14,
+         11,
+         6,
+         1,
+         2,
+         18
+      ],
+      "Outer East":[  
+         30,
+         33,
+         25,
+         20,
+         5,
+         2,
+         0,
+         28
+      ],
+      "South East":[  
+         16,
+         8,
+         34,
+         21,
+         12,
+         3,
+         7,
+         17
+      ],
+      "West":[  
+         11,
+         22,
+         10,
+         7,
+         7,
+         6,
+         3,
+         17
+      ],
+      "Mornington Peninsula":[  
+         8,
+         18,
+         33,
+         16,
+         9,
+         1,
+         3,
+         12
+      ]
+   }
+}
