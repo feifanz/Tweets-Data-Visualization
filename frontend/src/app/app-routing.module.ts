@@ -7,7 +7,7 @@ import { DashbordComponent } from './dashbord/dashbord.component';
 import {GooglemapviewComponent} from './googlemapview/googlemapview.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/view1', pathMatch: 'full' },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashbordComponent },
   { path: 'view1', component: View1Component },
   { path: 'view2', component: View2Component },

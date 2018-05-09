@@ -10,6 +10,8 @@ export class DashbordComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  	  const map: HTMLElement = document.getElementById('map');
+    map.style.display= 'none';
   }
 
 }
