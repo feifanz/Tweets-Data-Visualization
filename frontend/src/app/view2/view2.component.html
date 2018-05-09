@@ -1,31 +1,3 @@
-<div class="row" *ngIf="lineChartData">
-  <div class="col-md-8">
-    <div style="display: block; ">
-      <canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="jumbotron">
-      <h4>Twitter Posts in Percentage over a day by hours from 2015-2018</h4>
-      <p class="text-justify">Over a four year time span, the popularity of twitter has increased. The peak of tweet posting hours spread out from a centralized time period of 8-9am since 2015. Fewer tweets were posted between 4pm to 6pm.</p>
-    </div>
-  </div>
-</div>
-<hr/>
-<div class="row" *ngIf="lineChartData_sub_mel">
-  <div class="col-md-4">
-    <div class="jumbotron">
-      <h4> Comparison of tweet counts in suburbs of Melbourne by hours in 2018</h4>
-      <p class="text-justify">Inner suburb accounted for the majority of tweets usage that about 5 times more than the other suburbs. However, excluding the inner suburb, both of west and outer east have a peak value of count between 3am and 5am, which might be caused by the long distance to city.</p>
-    </div>
-  </div>
-  <div class="col-md-8">
-    <div style="display: block; ">
-      <canvas baseChart [datasets]="lineChartData_sub_mel" [labels]="lineChartLabels_period" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
-    </div>
-  </div>
-</div>
-<hr/>
 <div class="row">
   <div class="col-md-8" *ngIf="baseChartData_mel_syd">
     <div *ngIf="baseChartData_mel_syd.length >= 2">
@@ -36,8 +8,36 @@
   </div>
   <div class="col-md-4">
     <div class="jumbotron">
-      <h4>Comparison of tweet counts between Sydney and Melbourne by hours in 2018</h4>
+      <h4>Scenario 6: Comparison of tweet counts between Sydney and Melbourne by hours in 2018</h4>
       <p class="text-justify">A similar pattern is shown between Melbourne and Sydney and the number of twitter posts in Sydney generally larger than Melbourne. However, there is a reverse at 3am and 11am, which might indicate that residents of Melbourne are more active that live with a free and flexible lifestyle.</p>
+    </div>
+  </div>
+</div>
+<hr/>
+<div class="row" *ngIf="lineChartData_sub_mel">
+  <div class="col-md-4">
+    <div class="jumbotron">
+      <h4>Scenario 7: Comparison of tweet counts in suburbs of Melbourne by hours in 2018</h4>
+      <p class="text-justify">Inner suburb accounted for the majority of tweets usage that about 5 times more than the other suburbs. However, excluding the inner suburb, both of west and outer east have a peak value of count between 3am and 5am, which might be caused by the long distance to city.</p>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div style="display: block; ">
+      <canvas baseChart [datasets]="lineChartData_sub_mel" [labels]="lineChartLabels_period" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
+    </div>
+  </div>
+</div>
+<hr/>
+<div class="row" *ngIf="lineChartData">
+  <div class="col-md-8">
+    <div style="display: block; ">
+      <canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="jumbotron">
+      <h4>Scenario 8: Twitter Posts in Percentage over a day by hours from 2015-2018</h4>
+      <p class="text-justify">Over a four year time span, the popularity of twitter has increased. The peak of tweet posting hours spread out from a centralized time period of 8-9am since 2015. Fewer tweets were posted between 4pm to 6pm.</p>
     </div>
   </div>
 </div>
