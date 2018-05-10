@@ -1,3 +1,9 @@
+# This code is written by Team 6:
+# Yi Ding, 839679
+# Jianying Zhang, 799672
+# Feifan Zhang, 807480
+# Keren He, 865255
+# Jinhang Li, 867117
 import boto
 from boto.ec2.regioninfo import RegionInfo
 import time
