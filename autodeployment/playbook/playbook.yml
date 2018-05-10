@@ -8,7 +8,12 @@
 - hosts: Nectarhost
   become: yes
   become_user: root
+
   tasks:
+    - name: clean cache
+      command: rm /var/cache/apt/archives/lock
+    - name: release lock
+      command: rm /var/lib/dpkg/lock 
     - name: install git
       apt:
        name: git
